@@ -25,7 +25,7 @@ export const SendSolForm: FC = () => {
 		});
 		transaction.add(instruction);
 		connection.getLatestBlockhash('finalized')
-		const signature = await sendTransaction(transaction, connection, { maxRetries: 5 ,skipPreflight:true});
+		const signature = await sendTransaction(transaction, connection, { maxRetries: 5 });
 		setAmount("")
 		console.log(`Explorer URL: https://explorer.solana.com/tx/${signature}?cluster=mainnet-beta`);
 
