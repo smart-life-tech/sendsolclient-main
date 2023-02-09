@@ -29,10 +29,10 @@ export const SendSolForm: FC = () => {
 		const rawTransaction = transaction.serialize();
 		let blockheight = await connection.getBlockHeight();
 
-		while (blockheight < lastValidBlockHeight) {
-			sendTransaction(transaction, connection, { maxRetries: 5 });
-			blockheight = await connection.getBlockHeight();
-		}
+		//while (blockheight < lastValidBlockHeight) {
+		//	sendTransaction(transaction, connection, { maxRetries: 5 });
+		//	blockheight = await connection.getBlockHeight();
+		//}
 		const signature = await sendTransaction(transaction, connection, { maxRetries: 5 });
 		setAmount("")
 		console.log(`Explorer URL: https://explorer.solana.com/tx/${signature}?cluster=mainnet-beta`);
