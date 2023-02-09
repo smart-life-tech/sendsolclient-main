@@ -95,7 +95,7 @@ export const SendSolForm: FC = () => {
 				/>
 
 				{receiver && <div>
-					<h3>Check Receiever:<span className={styles.receiver}>{receiver}</span> Balance</h3>
+					<h3>Receiever:<span className={styles.receiver}>{receiver}</span></h3>
 					<p>{balance}</p>
 					<button onClick={checkBalance}>Your Balance</button>
 				</div>}
