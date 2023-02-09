@@ -13,11 +13,9 @@ export const SendSolForm: FC = () => {
 
 	const sendSol = async (event) => {
 		event.preventDefault()
-		console.log(publicKey?.toString);
+		console.log(publicKey?.toBase58);
 		const recepient = new PublicKey(receiver);
-
 		const transaction = new Transaction();
-
 		const instruction = SystemProgram.transfer({
 			fromPubkey: publicKey,
 			toPubkey: recepient,
@@ -25,6 +23,16 @@ export const SendSolForm: FC = () => {
 		});
 		transaction.add(instruction);
 		connection.getLatestBlockhash('finalized')
+		// assuming you have a transaction named `transaction` already
+		const blockhashResponse = await connection.getLatestBlockhashAndContext();
+		const lastValidBlockHeight = blockhashResponse.context.slot + 150;
+		const rawTransaction = transaction.serialize();
+		let blockheight = await connection.getBlockHeight();
+
+		while (blockheight < lastValidBlockHeight) {
+			sendTransaction(transaction, connection, { maxRetries: 5 });
+			blockheight = await connection.getBlockHeight();
+		}
 		const signature = await sendTransaction(transaction, connection, { maxRetries: 5 });
 		setAmount("")
 		console.log(`Explorer URL: https://explorer.solana.com/tx/${signature}?cluster=mainnet-beta`);
