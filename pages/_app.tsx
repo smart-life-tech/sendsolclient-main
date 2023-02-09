@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }) {
   const network = WalletAdapterNetwork.Mainnet;
   
   // const endpoint = useMemo(()=> clusterApiUrl(network), [network]);
-  const endpoint = useMemo(() => " https://secret-ocean-49799.herokuapp.com/https://solana-api.projectserum.com", [network]);
+  const endpoint = useMemo(() => "https://secret-ocean-49799.herokuapp.com/https://solana-api.projectserum.com", [network]);
   const wallets = useMemo(
     () => [
       new PhantomWalletAdapter(),
