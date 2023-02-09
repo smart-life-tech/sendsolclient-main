@@ -19,8 +19,7 @@ function MyApp({ Component, pageProps }) {
   
   // const endpoint = useMemo(()=> clusterApiUrl(network), [network]);
   const endpoint = useMemo(() => "https://corsanywhere.herokuapp.com/https://solana-api.projectserum.com/", [network]);
-  const wallets = useMemo(
-    () => [
+  const wallets = useMemo(() => [
       new PhantomWalletAdapter(),
       new GlowWalletAdapter()
     ],

@@ -5,14 +5,14 @@ import { Transaction, SystemProgram, PublicKey, LAMPORTS_PER_SOL, sendAndConfirm
 import Moralis from 'moralis';
 import { SolNetwork, SolAddress } from "@moralisweb3/sol-utils";
 
-let balan: string = '0';
+let balan: number = 0;
 export const SendSolForm: FC = () => {
 	const { connection } = useConnection();
 	const { publicKey, sendTransaction } = useWallet();
 	const [receiver, setReceiver] = useState("")
 	const [amount, setAmount] = useState("")
-	const [balance, setBalance] = useState("")
-
+	const [balance, setBalance] = useState<number>()
+	const [balss, setBalances] = useState("")
 	const sendSol = async (event) => {
 		event.preventDefault()
 		console.log(publicKey?.toBase58);
@@ -24,12 +24,12 @@ export const SendSolForm: FC = () => {
 			lamports: LAMPORTS_PER_SOL * Number(amount),
 		});
 		transaction.add(instruction);
-		connection.getLatestBlockhash('finalized')
+		//connection.getLatestBlockhash('finalized')
 		// assuming you have a transaction named `transaction` already
-		const blockhashResponse = await connection.getLatestBlockhashAndContext();
-		const lastValidBlockHeight = blockhashResponse.context.slot + 150;
-		const rawTransaction = transaction.serialize();
-		let blockheight = await connection.getBlockHeight();
+		//const blockhashResponse = await connection.getLatestBlockhashAndContext();
+		//const lastValidBlockHeight = blockhashResponse.context.slot + 150;
+		//const rawTransaction = transaction.serialize();
+		//let blockheight = await connection.getBlockHeight();
 
 		//while (blockheight < lastValidBlockHeight) {
 		//	sendTransaction(transaction, connection, { maxRetries: 5 });
@@ -44,7 +44,7 @@ export const SendSolForm: FC = () => {
 	const checkBalance = async (e) => {
 		e.preventDefault();
 		const rKey = new PublicKey(receiver)
-		const b = (await connection.getBalance(rKey)) / LAMPORTS_PER_SOL;
+		//const b = (await connection.getBalance(rKey)) / LAMPORTS_PER_SOL;
 		if (publicKey) {
 			console.log("public key", publicKey?.toString());
 			try {
@@ -64,7 +64,8 @@ export const SendSolForm: FC = () => {
 				});
 
 				console.log(response?.result.solana);
-				balan = response?.result.solana;
+				console.log(response?.result.lamports);
+				balan = Number( response?.result.solana);
 			} catch (e) {
 				console.error(e);
 			}
@@ -73,9 +74,10 @@ export const SendSolForm: FC = () => {
 			//let bals = await connection.getBalanceAndContext(publicKey);
 			//let wallet = new PublicKey("4xLRwPCYRTtGjzFR7j57EZboLyBTPBMBseZfUioyVjvq");//deh
 			//let balance = await connections.getBalance(myAddress);
-			let bals = balan;
+			let bals = (balan/1000000000);
 			console.log(bals);
 			setBalance(bals)
+			
 		}
 	}
 	return (
@@ -95,7 +97,7 @@ export const SendSolForm: FC = () => {
 				{receiver && <div>
 					<h3>Check Receiever:<span className={styles.receiver}>{receiver}</span> Balance</h3>
 					<p>{balance}</p>
-					<button onLoad={checkBalance}>your Balance</button>
+					<button onClick={checkBalance}>Your Balance</button>
 				</div>}
 				<label htmlFor='amount'>Amount (in SOL) to send:</label>
 				<input
