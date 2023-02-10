@@ -11,7 +11,6 @@ var cors = require('cors')
 // require('../styles/globals.css');
 require('../styles/Home.module.css');
 require('@solana/wallet-adapter-react-ui/styles.css');
-
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
