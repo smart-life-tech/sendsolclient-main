@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps }) {
  // const endpoint = useMemo(() => "https://corsanywhere.herokuapp.com/https://solana-api.projectserum.com/", [network]);
  const endpoint = useMemo(() => {
   const corsUrl = "https://cors-anywhere.herokuapp.com/";
-  return `${corsUrl}https://solana-api.projectserum.com/"`;
+  return `${corsUrl}https://solana-api.projectserum.com`;
 }, [network]);
 
  const wallets = useMemo(() => [
