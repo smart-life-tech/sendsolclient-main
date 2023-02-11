@@ -12,9 +12,15 @@ import { clusterApiUrl } from "@solana/web3.js";
 require('../styles/Home.module.css');
 require('@solana/wallet-adapter-react-ui/styles.css');
 import '../styles/globals.css'
-
 /*
 var cors = require('cors');
+const express = require("express");
+const app = express();
+app.use(cors({
+  origin: "http://localhost:3000"
+}));
+
+
 //import  {cors} from "cors";
 
 const express = require("express");
@@ -26,7 +32,7 @@ function MyApp({ Component, pageProps }) {
   const network = WalletAdapterNetwork.Mainnet;
   
   // const endpoint = useMemo(()=> clusterApiUrl(network), [network]);
-  const endpoint = useMemo(() => "https://corsanywhere.herokuapp.com/https://solana-api.projectserum.com", [network]);
+  const endpoint = useMemo(() => " https://solana-api.syndica.io/access-token/r6O32Ot8TFT1PhXbGvPNXNWumRbAZzhz5KOHp9ShLhG2v1yBrbefycT2frWlxEqz/rpc/", [network]);
  //const endpoint = useMemo(() => {const corsUrl = "https://cors-anywhere.herokuapp.com/";
  //return `${corsUrl}https://solana-api.projectserum.com`;
 //}, [network]);
